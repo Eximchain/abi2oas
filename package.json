@@ -1,0 +1,39 @@
+{
+  "name": "abi2oas",
+  "version": "0.01",
+  "description": "Ingests a smart contract's ABI and autogenerates OpenAPI JSON, ready for Swagger codegen.",
+  "main": "N/A",
+  "scripts": {
+    "test": "mocha ./tests/**.spec.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tiholic/eximchain-eth-contract-codegen.git"
+  },
+  "keywords": [
+    "eximchain",
+    "ethereum",
+    "eth",
+    "smartcontract",
+    "smart",
+    "contract",
+    "codegen",
+    "telegrambot",
+    "telegram",
+    "swagger",
+    "openapi"
+  ],
+  "author": "Rohit R. Abbadi",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/tiholic/eximchain-eth-contract-codegen/issues"
+  },
+  "homepage": "https://github.com/tiholic/eximchain-eth-contract-codegen#readme",
+  "dependencies": {
+    "handlebars": "^4.0.11"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^4.0.1"
+  }
+}
