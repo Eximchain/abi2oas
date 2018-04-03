@@ -1,5 +1,5 @@
 # abi2oas
-Ingests a smart contract's [ABI](https://solidity.readthedocs.io/en/develop/abi-spec.html) and autogenerates [OpenAPI](https://swagger.io/specification/) JSON, ready for [Swagger](https://swagger.io/) codegen.
+Ingests a smart contract's [ABI](https://solidity.readthedocs.io/en/develop/abi-spec.html) and autogenerates a JSON conforming to the [OpenAPI Spec](https://swagger.io/specification/), ready for [Swagger](https://swagger.io/) codegen.
 
 ## Usage
 ### CLI
@@ -34,7 +34,7 @@ abi2oas.convert({
 ```
 
 ### Config
-The config JSON includes the path to the contract, ethereum options, and swagger options.  
+The config JSON includes the path to the contract, ethereum options, and swagger options.  The path to the contract should be relative to the location of the config file.
 
 ```
 {

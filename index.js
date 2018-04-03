@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 
 let fs = require("fs");
+let path = require("path");
+
 let License = require("./api_units/License");
 let Info = require("./api_units/Info");
 let Entity = require("./api_units/Entity");
@@ -23,8 +25,10 @@ class OpenAPIGenerator {
      * */
     constructor(config_file) {
         "use strict";
-        this.config = JSON.parse(fs.readFileSync(config_file));
-        this.cs = JSON.parse(fs.readFileSync((this.config.contract)));    //cs = contract_schema
+        let config_path = path.dirname(config_file);
+        this.config = JSON.parse(fs.readFileSync(config_file)); 
+        let contract_path = path.join(config_path, this.config.contract);
+        this.cs = JSON.parse(fs.readFileSync(contract_path));    //cs = contract_schema
     }
 
     /**
@@ -103,7 +107,7 @@ class OpenAPIGenerator {
             console.log(JSON.stringify(abiObj, null, 4));
             return abiObj;
         }
-    },
+    }
 
     /**
     * */
