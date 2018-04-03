@@ -54,19 +54,19 @@ class OpenAPIGenerator {
         /*
         transaction receipt schema...
         =============================
-        * transactionHash: string
-          transactionIndex: number
-          blockHash: string
-          blockNumber: number
-          from: string
-          to: string
-          contractAddress: string
-          cumulativeGasUsed: number
-          gasUsed: number
-          logs?: Array<Log>
-          events?: {
-            [eventName: string]: EventLog
-          }
+        *   transactionHash: string
+            transactionIndex: number
+            blockHash: string
+            blockNumber: number
+            from: string
+            to: string
+            contractAddress: string
+            cumulativeGasUsed: number
+            gasUsed: number
+            logs?: Array<Log>
+            events?: {
+                [eventName: string]: EventLog
+            }
         */
     }
 

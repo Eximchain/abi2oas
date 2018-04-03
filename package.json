@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tiholic/eximchain-eth-contract-codegen.git"
+    "url": "git+https://github.com/john-osullivan/abi2oas.git"
   },
   "keywords": [
     "eximchain",
@@ -18,20 +18,16 @@
     "smart",
     "contract",
     "codegen",
-    "telegrambot",
-    "telegram",
     "swagger",
     "openapi"
   ],
-  "author": "Rohit R. Abbadi",
+  "author": "Rohit R. Abbadi & John O'Sullivan",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/tiholic/eximchain-eth-contract-codegen/issues"
+    "url": "https://github.com/john-osullivan/abi2oas/issues"
   },
-  "homepage": "https://github.com/tiholic/eximchain-eth-contract-codegen#readme",
-  "dependencies": {
-    "handlebars": "^4.0.11"
-  },
+  "homepage": "https://github.com/john-osullivan/abi2oas#readme",
+  "dependencies": {},
   "devDependencies": {
     "chai": "^4.1.2",
     "mocha": "^4.0.1"
