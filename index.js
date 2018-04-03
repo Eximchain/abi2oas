@@ -96,11 +96,22 @@ class OpenAPIGenerator {
      * @description Writes the serialized json data to provided file path. Else writes the output to console...
      * */
     build(file_path) {
+        let abiObj = this.openAPI.serialize();
         if(file_path){
-            fs.writeFileSync(file_path, JSON.stringify(this.openAPI.serialize(), null, 4));
+            fs.writeFileSync(file_path, JSON.stringify(abiObj, null, 4));
         }else{
-            console.log(JSON.stringify(this.openAPI.serialize(), null, 4));
+            console.log(JSON.stringify(abiObj, null, 4));
+            return abiObj;
         }
+    },
+
+    /**
+    * */
+    static convert(config){
+        let generator = new OpenAPIGenerator(config);
+        generator.init();
+        generator.process();
+        return generator.build();
     }
 
 }
