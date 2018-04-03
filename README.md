@@ -33,7 +33,15 @@ abi2oas.convert({
   }, '<path_to_output.json>');
 ```
 
-### Config
+
+## Method Mapping
+The smart contract is mapped to the OpenAPI spec on a per-function basis:  
+
+- Each function's name becomes an API path (e.g. `whitelistAddress` function yields `/whitelistAddress` path).  If the function accepts inputs, then its path can accept POST requests.  If the function also returns outputs, then its path also accepts GET requests.  
+- A tag is automatically generated for each function, representing its dynamic scope (e.g. a `whitelistAddressScope` tag).  All methods for each function automatically have its tag, along with any other custom tags specified in the config.
+- Definitions are automatically generated for each function-method's params and response (e.g. `whitelistAddress_post_params` & `whitelistAddress_post_params_response`), as well as definitions for receipts and basic types.
+
+## Config
 The config JSON includes the path to the contract, ethereum options, and swagger options.  The path to the contract should be relative to the location of the config file.
 
 ```
@@ -49,7 +57,7 @@ The config JSON includes the path to the contract, ethereum options, and swagger
 ```
 Config must be valid JSON, comments only included for illustrative purposes.
 
-#### Custom Tags
+### Custom Tags
 You can specify additional tags using the `tags` key.  
 
 ```
@@ -77,13 +85,6 @@ Custom tags can be attached per-endpoint and per-method using the `api` key.  Fo
   }
 }
 ```
-
-## Method Mapping
-The smart contract is mapped to the OpenAPI spec on a per-function basis:  
-
-- Each function's name becomes an API path (e.g. `whitelistAddress` function yields `/whitelistAddress` path).  If the function accepts inputs, then its path can accept POST requests.  If the function also returns outputs, then its path also accepts GET requests.  
-- A tag is automatically generated for each function, representing its dynamic scope (e.g. a `whitelistAddressScope` tag).  All methods for each function automatically have its tag, along with any other custom tags specified in the config.
-- Definitions are automatically generated for each function-method's params and response (e.g. `whitelistAddress_post_params` & `whitelistAddress_post_params_response`), as well as definitions for receipts and basic types.
 
 ## Licensing
 abi2oas is developed & maintained by [Eximchain](https://eximchain.com/), released for public use under the Apache-2.0 License.
