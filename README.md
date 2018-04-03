@@ -26,7 +26,7 @@ npm install --save abi2oas
 
 Import like any other package, then use `convert` method:
 ```nodejs
-import abi2oas from 'abi2oas';
+const abi2oas = require('abi2oas');
 
 abi2oas.convert({
   // config values
@@ -81,8 +81,8 @@ Custom tags can be attached per-endpoint and per-method using the `api` key.  Fo
 ## Method Mapping
 The smart contract is mapped to the OpenAPI spec on a per-function basis:  
 
-- Each function's name becomes an API path.  If the function accepts inputs, then its path can accept POST requests.  If the function also returns outputs, then its path also accepts GET requests.  
-- A tag is automatically generated for each function, representing its dynamic scope.  All methods for each function automatically have its tag, along with any other custom tags specified in the config.
+- Each function's name becomes an API path (e.g. `whitelistAddress` function yields `/whitelistAddress` path).  If the function accepts inputs, then its path can accept POST requests.  If the function also returns outputs, then its path also accepts GET requests.  
+- A tag is automatically generated for each function, representing its dynamic scope (e.g. a `whitelistAddressScope` tag).  All methods for each function automatically have its tag, along with any other custom tags specified in the config.
 - Definitions are automatically generated for each function-method's params and response (e.g. `whitelistAddress_post_params` & `whitelistAddress_post_params_response`), as well as definitions for receipts and basic types.
 
 ## Licensing

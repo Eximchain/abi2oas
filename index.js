@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 let fs = require("fs");
 let License = require("./api_units/License");
 let Info = require("./api_units/Info");
