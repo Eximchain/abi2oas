@@ -3,12 +3,13 @@
   "version": "0.01",
   "description": "Ingests a smart contract's ABI and autogenerates OpenAPI JSON, ready for Swagger codegen.",
   "main": "index.js",
+  "bin" : "index.js",
   "scripts": {
     "test": "mocha ./tests/**.spec.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/john-osullivan/abi2oas.git"
+    "url": "git+https://github.com/Eximchain/abi2oas.git"
   },
   "keywords": [
     "eximchain",
@@ -24,9 +25,9 @@
   "author": "Rohit R. Abbadi & John O'Sullivan",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/john-osullivan/abi2oas/issues"
+    "url": "https://github.com/Eximchain/abi2oas/issues"
   },
-  "homepage": "https://github.com/john-osullivan/abi2oas#readme",
+  "homepage": "https://github.com/Eximchain/abi2oas#readme",
   "dependencies": {},
   "devDependencies": {
     "chai": "^4.1.2",

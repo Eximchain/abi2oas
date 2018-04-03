@@ -1,5 +1,5 @@
 # abi2oas
-Ingests a smart contract's ABI and autogenerates OpenAPI JSON, ready for Swagger codegen.
+Ingests a smart contract's [ABI](https://solidity.readthedocs.io/en/develop/abi-spec.html) and autogenerates [OpenAPI](https://swagger.io/specification/) JSON, ready for [Swagger](https://swagger.io/) codegen.
 
 ## Usage
 ### CLI
@@ -79,15 +79,13 @@ Custom tags can be attached per-endpoint and per-method using the `api` key.  Fo
 ```
 
 ## Method Mapping
-The smart contract is mapped to the OpenAPI spec on a per-function basis.  
+The smart contract is mapped to the OpenAPI spec on a per-function basis:  
 
-Each function's name becomes an API path.  If the function accepts inputs, then its path can accept POST requests.  If the function also returns outputs, then its path also accepts GET requests.  
-
-A tag is automatically generated for each function, representing its dynamic scope.  All methods for each function automatically have its tag, along with any other custom tags specified in the config.
-
-Definitions are automatically generated for each function-method's params and response (e.g. `whitelistAddress_post_params` & `whitelistAddress_post_params_response`), as well as definitions for receipts and basic types.
+- Each function's name becomes an API path.  If the function accepts inputs, then its path can accept POST requests.  If the function also returns outputs, then its path also accepts GET requests.  
+- A tag is automatically generated for each function, representing its dynamic scope.  All methods for each function automatically have its tag, along with any other custom tags specified in the config.
+- Definitions are automatically generated for each function-method's params and response (e.g. `whitelistAddress_post_params` & `whitelistAddress_post_params_response`), as well as definitions for receipts and basic types.
 
 ## Licensing
 abi2oas is developed & maintained by [Eximchain](https://eximchain.com/), released for public use under the Apache-2.0 License.
 
-Output from `abi2oas` is configured by default to use the same license.
+Output from abi2oas is configured by default to use the same license.
