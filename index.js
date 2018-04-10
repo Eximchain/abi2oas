@@ -27,7 +27,7 @@ class OpenAPIGenerator {
         "use strict";
         let config_path = path.dirname(config_file);
         this.config = JSON.parse(fs.readFileSync(config_file)); 
-        let contract_path = path.join(config_path, this.config.contract);
+        let contract_path = path.resolve(config_path, this.config.contract);
         this.cs = JSON.parse(fs.readFileSync(contract_path));    //cs = contract_schema
     }
 
