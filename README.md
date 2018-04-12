@@ -1,6 +1,6 @@
 # abi2oas
 
-**WARNING: This library is a work in progress, not yet fully functional.**
+**WARNING (2018-04-12): This library is still a work in progress, not yet fully functional.  API may change over time.**
 
 Ingests a smart contract's [ABI](https://solidity.readthedocs.io/en/develop/abi-spec.html) and autogenerates a JSON conforming to the [OpenAPI Spec](https://swagger.io/specification/), ready for [Swagger Codegen](https://swagger.io/swagger-codegen/).
 
@@ -92,6 +92,16 @@ Custom tags can be attached per-endpoint and per-method using the `api` key.  Fo
   }
 }
 ```
+
+## Roadmap
+### Short-Term
+-[] Check that the static `convert` method is working when imported to another npm package.
+-[] Fix autogen to use GET or POST based on whether the function is `constant`, not whether it has inputs or outputs.
+-[] User-friendly CLI interaction via commander
+-[] Write tests
+
+### Long-Term
+
 
 ## Licensing
 abi2oas is developed & maintained by [Eximchain](https://eximchain.com/), released for public use under the Apache-2.0 License.

@@ -3,8 +3,8 @@
   "version": "0.0.3",
   "description": "Ingests a smart contract's ABI and autogenerates OpenAPI JSON, ready for Swagger codegen.",
   "main": "index.js",
-  "bin" : "index.js",
-  "preferGlobal" : true,
+  "bin": "index.js",
+  "preferGlobal": true,
   "scripts": {
     "test": "mocha ./tests/**.spec.js"
   },
@@ -29,7 +29,9 @@
     "url": "https://github.com/Eximchain/abi2oas/issues"
   },
   "homepage": "https://github.com/Eximchain/abi2oas#readme",
-  "dependencies": {},
+  "dependencies": {
+    "commander": "^2.15.1"
+  },
   "devDependencies": {
     "chai": "^4.1.2",
     "mocha": "^4.0.1"
