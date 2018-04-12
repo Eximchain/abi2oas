@@ -21,12 +21,16 @@ class OpenAPIGenerator {
     /**
      * @constructor
      * @description
+     * @param {Object|String} config An object following the config spec, 
      * Read's the contract schema which is built using truffle migrate and stores the schema.
      * */
     constructor(config_file) {
         "use strict";
+        // TODO: Let this accept eitiher string path to object or just the object itself.
         let config_path = path.dirname(config_file);
         this.config = JSON.parse(fs.readFileSync(config_file)); 
+
+        // Use __dir instead of config_path in config_string case.
         let contract_path = path.resolve(config_path, this.config.contract);
         this.cs = JSON.parse(fs.readFileSync(contract_path));    //cs = contract_schema
     }
@@ -79,7 +83,7 @@ class OpenAPIGenerator {
     /**
      * @function
      * @instance
-     * @description handle's reading the data loaded from file and creating objects
+     * @description Consumes config file and ABI to add data to openAPI object
      * */
     process() {
         this.buildDefaultDefinitions();
@@ -97,7 +101,7 @@ class OpenAPIGenerator {
      * @function
      * @instance
      * @param {String} [file_path=undefined] - path of output file
-     * @description Writes the serialized json data to provided file path. Else writes the output to console...
+     * @description Serializes openAPI object to provided file path, or writes it to the console and then returns it.
      * */
     build(file_path) {
         let abiObj = this.openAPI.serialize();
@@ -109,13 +113,19 @@ class OpenAPIGenerator {
         }
     }
 
-    /**
-    * */
-    static convert(config){
+   /**
+     * TODO: Finish writing docs, verify this works when imported into abi2api
+     * @function
+     * @static
+     * @param {Object|String} config Object corresponding to config spec, or string path to a config JSON's location.
+     * @param {String} [file_path=undefined] - Path for output file
+     * @description Given 
+     * */
+    static convert(config, file_path){
         let generator = new OpenAPIGenerator(config);
         generator.init();
         generator.process();
-        return generator.build();
+        return generator.build(file_path);
     }
 
 }
