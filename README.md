@@ -44,7 +44,7 @@ const contractApiSpec = abi2oas.convert({
 ## Method Mapping
 The smart contract is mapped to the OpenAPI spec on a per-function basis:  
 
-- Each function's name becomes an API path (e.g. `whitelistAddress` function yields `/whitelistAddress` path).  If the function accepts inputs, then its path can accept POST requests.  If the function also returns outputs, then its path also accepts GET requests.  
+- Each function's name becomes an API path (e.g. `whitelistAddress` function yields `/whitelistAddress` path).  If the function is `constant`, then its path accepts GET requests.  Otherwise, it accepts POST requests.
 - A tag is automatically generated for each function, representing its dynamic scope (e.g. a `whitelistAddressScope` tag).  All methods for each function automatically have its tag, along with any other custom tags specified in the config.
 - Definitions are automatically generated for each function-method's params and response (e.g. `whitelistAddress_post_params` & `whitelistAddress_post_params_response`), as well as definitions for receipts and basic types.
 
@@ -96,9 +96,10 @@ Custom tags can be attached per-endpoint and per-method using the `api` key.  Fo
 ## Roadmap
 ### Short-Term
 -[] Check that the static `convert` method is working when imported to another npm package.
--[] Fix autogen to use GET or POST based on whether the function is `constant`, not whether it has inputs or outputs.
+-[x] Fix autogen to use GET or POST based on whether the function is `constant`, not whether it has inputs or outputs.
+-[] Add default definitions for Ethereum primitive types other than address & receipt
 -[] User-friendly CLI interaction via commander
--[] Write tests
+-[] Write tests for a variety of contracts
 
 ### Long-Term
 

@@ -79,16 +79,14 @@ class Entity{
      * @description adds HTTP methods to paths
      * */
     addMethodsToPath(){
-        if(this.entity.inputs.length){
-            let method = this.path.addMethod("post", this.entity.inputs, this);
-            this.addResponsesToMethod(method);
-            this.addTagsToMethod(method);
+        let method;
+        if (this.entity.constant){
+            method = this.path.addMethod("get", this.entity.inputs, this);
+        } else {
+            method = this.path.addMethod("post", this.entity.inputs, this);
         }
-        if(this.entity.outputs.length) {
-            let get_method = this.path.addMethod("get", this.entity.inputs, this);
-            this.addResponsesToMethod(get_method);
-            this.addTagsToMethod(get_method);
-        }
+        this.addResponsesToMethod(method);
+        this.addTagsToMethod(method);
     }
 
     /**

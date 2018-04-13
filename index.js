@@ -5,16 +5,7 @@ const fs = require('fs');
 const path = require('path');
 const program = require('commander');
 
-const isString = thing => typeof thing === 'string';
-const isJSONFile = thing => path.extname(thing).toLowerCase() === '.json';
-const isWritable = dirname => fs.access(dirname, fs.constants.W_OK, err => !!err )
-const errorClose = (msg) => {
-    let errorMsg = `Error: ${msg}  Run "abi2oas --help" to see command syntax.`
-    console.log("");
-    console.error(errorMsg);
-    console.log("");
-    return new Error(errorMsg);
-}
+const { errorClose } = require('./util');
 
 program
     .version('0.0.4')
@@ -22,13 +13,7 @@ program
     .description("Autogenerate an Open API JSON corresponding to the functions in a smart contract's ABI.  \n  Call with the paths to your config file and your desired OpenAPI output file.")
     .usage('<config_file_path> <output_file_path>')
     .action((config_file, output_file) => {
-        if (!fs.existsSync(config_file)) return errorClose(`Specified config file "${config_file}" does not exist.`)
-        if (!isJSONFile(config_file)) return errorClose(`Specified config file "${config_file}" is not a JSON file.`)
-        if (!isJSONFile(output_file)) return errorClose(`Specified output file "${output_file}" is not a JSON file.`)
-        if (!isWritable(path.dirname(output_file))) return errorClose(`Specified output directory "${path.dirname(output_file)}" is not writable.`)
-
-        let generatedAPI = OpenAPIGenerator.convert(config_file, output_file);
-        console.log(`Completed generating OpenAPI JSON for ${generatedAPI.info.title}, output is in ${output_file}.`);        
+        return OpenAPIGenerator.convert(config_file, output_file);
     })
 
 program.on('--help', () => {
@@ -38,7 +23,9 @@ program.on('--help', () => {
 });  
 
 if (require.main === module) {
-    program.parse(process.argv)
+    let args = process.argv;
+    if (args.length-1 !== 2) return errorClose(`abi2oas requires 2 arguments, not ${args.length - 1}.`)
+    program.parse(args);
 } else {
     module.exports = OpenAPIGenerator;
 }
