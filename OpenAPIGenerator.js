@@ -9,7 +9,7 @@ let Tag = require("./api_units/Tag");
 let Definition = require("./api_units/Definition");
 let Property = require("./api_units/Property");
 
-const { isJSONFile, isWritable, isString, errorClose } = require('./util');
+const { isJSONFile, isString, errorClose, paddedLog } = require('./util');
 
 
 /**
@@ -111,6 +111,7 @@ class OpenAPIGenerator {
         }else{
             console.log(openAPIStr);
         }
+        paddedLog(`Successfully generated OpenAPI JSON for contract "${openAPIObj.info.title}", view result at "${path.resolve(__dirname, file_path)}"`);
         return openAPIObj;
     }
 
@@ -126,8 +127,8 @@ class OpenAPIGenerator {
             if (!fs.existsSync(config)) return errorClose(`Specified config file "${config}" does not exist.`)
             if (!isJSONFile(config)) return errorClose(`Specified config file "${config}" is not a JSON file.`)
         }
+        if (!isString(file_path)) return errorClose("Provided output path was not a string.");
         if (!isJSONFile(file_path)) return errorClose(`Specified output file "${file_path}" is not a JSON file.`)
-        if (!isWritable(path.dirname(file_path))) return errorClose(`Specified output directory "${path.dirname(file_path)}" is not writable.`)
 
         let generator = new OpenAPIGenerator(config);
         generator.init();
