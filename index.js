@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 const fs = require('fs');
-const package = JSON.parse(fs.readFileSync('./package.json'));
+const path = require('path');
+const package = JSON.parse(fs.readFileSync(path.resolve(__dirname, './package.json')));
 const OpenAPIGenerator = require('./OpenAPIGenerator');
 const program = require('commander');
 
@@ -16,7 +17,10 @@ program
     })
 
 program.on('--help', () => {
-    paddedLog('  Both paths should be relative to the current working directory.  For more information about configuration and generation, view the abi2oas homepage on GitHub.');
+    paddedLog([
+        '  Both paths should be relative to the current working directory.',
+        '  For more information about configuration and generation, view the abi2oas homepage on GitHub.'
+    ]);
 });  
 
 if (require.main === module) {

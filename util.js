@@ -7,7 +7,11 @@ const isJSONFile = thing => path.extname(thing).toLowerCase() === '.json';
 
 const paddedLog = (msg) =>{
     console.log("");
-    console.log(msg);
+    if (isString(msg)) {
+        console.log(msg);
+    } else if (Array.isArray(msg)){
+        msg.forEach(item => console.log(item))
+    }
     console.log("");
 };
 
