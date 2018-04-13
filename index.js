@@ -8,7 +8,7 @@ const program = require('commander');
 const { errorClose } = require('./util');
 
 program
-    .version('0.0.4')
+    .version('0.0.5')
     .name('abi2oas')
     .description("Autogenerate an Open API JSON corresponding to the functions in a smart contract's ABI.  \n  Call with the paths to your config file and your desired OpenAPI output file.")
     .usage('<config_file_path> <output_file_path>')
