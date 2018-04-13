@@ -95,10 +95,10 @@ Custom tags can be attached per-endpoint and per-method using the `api` key.  Fo
 
 ## Roadmap
 ### Short-Term
--[] Check that the static `convert` method is working when imported to another npm package.
 -[x] Fix autogen to use GET or POST based on whether the function is `constant`, not whether it has inputs or outputs.
+-[x] User-friendly CLI interaction via commander
+-[] Check that the static `convert` method is working when imported to another npm package.
 -[] Add default definitions for Ethereum primitive types other than address & receipt
--[] User-friendly CLI interaction via commander
 -[] Write tests for a variety of contracts
 
 ### Long-Term

@@ -29,8 +29,10 @@ class OpenAPIGenerator {
         let usingPathArg = typeof config === 'string';
         this.config = usingPathArg ? JSON.parse(fs.readFileSync(config)) : config;
 
-        let config_path = usingPathArg ? path.dirname(config) : __dirname;
+        let config_path = usingPathArg ? path.dirname(config) : process.cwd();
+        console.log('config_path in abi2oas: ',config_path);
         let contract_path = path.resolve(config_path, this.config.contract);
+        console.log('resulting contract_path in abi2oas: ',contract_path);
         this.contract = JSON.parse(fs.readFileSync(contract_path));    //cs = contract_schema
     }
 
