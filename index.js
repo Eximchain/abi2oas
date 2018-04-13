@@ -1,21 +1,22 @@
 #!/usr/bin/env node
-
+const fs = require('fs');
+const package = JSON.parse(fs.readFileSync('./package.json'));
 const OpenAPIGenerator = require('./OpenAPIGenerator');
 const program = require('commander');
 
 const { errorClose, paddedLog } = require('./util');
 
 program
-    .version('0.0.8')
-    .name('abi2oas')
-    .description("Autogenerate an Open API JSON corresponding to the functions in a smart contract's ABI.  \n  Call with the paths to your config file and your desired OpenAPI output file.")
+    .version(package.version)
+    .name(package.name)
+    .description(package.description)
     .usage('<config_file_path> <output_file_path>')
     .action((config_file, output_file) => {
         return OpenAPIGenerator.convert(config_file, output_file);
     })
 
 program.on('--help', () => {
-    paddedLog('  For more information about configuration and generation, view the abi2oas homepage on GitHub.');
+    paddedLog('  Both paths should be relative to the current working directory.  For more information about configuration and generation, view the abi2oas homepage on GitHub.');
 });  
 
 if (require.main === module) {

@@ -1,7 +1,7 @@
 {
   "name": "abi2oas",
-  "version": "0.0.8",
-  "description": "Ingests a smart contract's ABI and autogenerates OpenAPI JSON, ready for Swagger codegen.",
+  "version": "0.0.9",
+  "description": "Ingests a smart contract's ABI and autogenerates an OpenAPI JSON, ready for Swagger codegen.",
   "main": "index.js",
   "bin": "index.js",
   "preferGlobal": true,
