@@ -111,7 +111,7 @@ class OpenAPIGenerator {
         }else{
             console.log(openAPIStr);
         }
-        paddedLog(`Successfully generated OpenAPI JSON for contract "${openAPIObj.info.title}", view result at "${path.resolve(__dirname, file_path)}"`);
+        paddedLog(`Successfully generated OpenAPI JSON for contract "${openAPIObj.info.title}", view result at "${path.resolve(process.cwd(), file_path)}"`);
         return openAPIObj;
     }
 
