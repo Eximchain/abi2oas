@@ -90,17 +90,8 @@ Custom tags can be attached per-endpoint and per-method using the `api` key.  Fo
   }
 }
 ```
-
-## Roadmap
-### Short-Term
--[x] Fix autogen to use GET or POST based on whether the function is `constant`, not whether it has inputs or outputs.
--[x] User-friendly CLI interaction via commander
--[x] Check that the static `convert` method is working when imported to another npm package.
--[] Add default definitions for Ethereum primitive types other than address & receipt
--[] Write tests for a variety of contracts
-
-### Long-Term
--[] Event Support
+## Development
+You can find [our roadmap](./ROADMAP.md) on GitHub.
 
 ## Licensing
 abi2oas is developed & maintained by [Eximchain](https://eximchain.com/), released for public use under the Apache-2.0 License.
