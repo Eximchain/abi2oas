@@ -15,10 +15,10 @@ yarn global add abi2oas
 Use in your terminal of choice by running:
 
 ```
-abi2oas <path_to_contract.json> <path_to_output.json>
+abi2oas <path_to_contract.json> <path_to_output.json> [options]
 ```
 
-If you are on Windows, you might need to refresh your path by restarting the terminal.
+The CLI options let you specify values from the config file -- you can learn by running `abi2oas --help`.  If you are on Windows, you might need to refresh your path by restarting the terminal.
 
 ### Node.js
 You can also use `abi2oas` directly within node.  Install directly to your project:
