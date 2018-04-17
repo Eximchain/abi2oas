@@ -1,7 +1,5 @@
 # abi2oas
 
-**WARNING (2018-04-12): This library is still a work in progress, not yet fully functional.  API may change over time.**
-
 Ingests a smart contract's [ABI](https://solidity.readthedocs.io/en/develop/abi-spec.html) and autogenerates a JSON conforming to the [OpenAPI Spec](https://swagger.io/specification/), ready for [Swagger Codegen](https://swagger.io/swagger-codegen/).
 
 ## Usage
@@ -22,24 +20,25 @@ abi2oas <path_to_config.json> <path_to_output.json>
 
 If you are on Windows, you might need to refresh your path by restarting the terminal.
 
-### Node.js (under construction)
-You can also use `abi2oas1` directly within node.  Install directly to your project:
+### Node.js
+You can also use `abi2oas` directly within node.  Install directly to your project:
 
 ```
 npm install --save abi2oas
+
+// OR
 
 yarn add abi2oas
 ```
 
 Import like any other package, then use the `convert` method to build the OpenAPI object:
-```nodejs
+
+```javascript
 const abi2oas = require('abi2oas');
 
-const contractApiSpec = abi2oas.convert({
-  version : '1.0.0',
-  contract : '<path_to_contract.json>'
-});  
+const contractApiSpec = abi2oas.convert(<path_to_contract.json>, <output_path.json>, [config]);
 ```
+`.convert()` runs synchronously and returns the serialized object corresponding to the OpenAPI JSON.  `config` in this method may either be an object or a string pointing to a config JSON.  Read below for config spec.
 
 ## Method Mapping
 The smart contract is mapped to the OpenAPI spec on a per-function basis:  
