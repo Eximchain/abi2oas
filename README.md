@@ -49,12 +49,11 @@ The smart contract is mapped to the OpenAPI spec on a per-function basis:
 - Definitions are automatically generated for each function-method's params and response (e.g. `whitelistAddress_post_params` & `whitelistAddress_post_params_response`), as well as definitions for receipts and basic types.
 
 ## Config
-The config JSON includes the path to the contract, ethereum options, and swagger options.  The path to the contract should be relative to the location of the config file.
+The config JSON includes the path to the contract, ethereum options, and swagger options.
 
 ```
 {
-  "version": "1.0.0",
-  "contract": "<path_to_your_contract.json>",
+  "version": "1.0.0", // optional, "1.0.0" is default
   "schemes": ["https"], // optional, ["https"] is default
   "host": "localhost:8080", // optional, "localhost:8080" is default
   "basePath": "/", // optional, '/' is default
@@ -97,12 +96,12 @@ Custom tags can be attached per-endpoint and per-method using the `api` key.  Fo
 ### Short-Term
 -[x] Fix autogen to use GET or POST based on whether the function is `constant`, not whether it has inputs or outputs.
 -[x] User-friendly CLI interaction via commander
--[] Check that the static `convert` method is working when imported to another npm package.
+-[x] Check that the static `convert` method is working when imported to another npm package.
 -[] Add default definitions for Ethereum primitive types other than address & receipt
 -[] Write tests for a variety of contracts
 
 ### Long-Term
-
+-[] Event Support
 
 ## Licensing
 abi2oas is developed & maintained by [Eximchain](https://eximchain.com/), released for public use under the Apache-2.0 License.

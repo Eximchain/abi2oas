@@ -11,7 +11,6 @@ let Property = require("./api_units/Property");
 
 const { isJSONFile, isString, errorClose, paddedLog } = require('./util');
 
-
 /**
  * @class
  * @classdesc Parser class that actually parses and generates OpenAPI config
@@ -24,16 +23,10 @@ class OpenAPIGenerator {
      * @param {Object|String} config Either an object following the config spec, or the string path to a corresponding JSON.
      * Reads the contract metadata which is built using truffle migrate and stores the schema.
      * */
-    constructor(config) {
-        "use strict";
-        let usingPathArg = typeof config === 'string';
-        this.config = usingPathArg ? JSON.parse(fs.readFileSync(config)) : config;
-
-        let config_path = usingPathArg ? path.dirname(config) : process.cwd();
-        console.log('config_path in abi2oas: ',config_path);
-        let contract_path = path.resolve(config_path, this.config.contract);
-        console.log('resulting contract_path in abi2oas: ',contract_path);
-        this.contract = JSON.parse(fs.readFileSync(contract_path));    //cs = contract_schema
+    constructor(contract_path, config={}) {
+        this.config = typeof config === 'string' ? 
+            JSON.parse(fs.readFileSync(config)) : config;
+        this.contract = JSON.parse(fs.readFileSync(path.resolve(process.cwd(), contract_path)));
     }
 
     /**
@@ -43,7 +36,12 @@ class OpenAPIGenerator {
      * */
     init() {
         let license = new License("Apache 2.0", "http://www.apache.org/licenses/LICENSE-2.0.html");
-        let info = new Info(this.contract.contractName, this.contract.contractName, license, this.config.version);
+        let info = new Info(
+            this.contract.contractName, 
+            this.contract.contractName, 
+            license, 
+            this.config.version || '1.0.0'
+        );
         this.openAPI = new Swagger(info, {
             schemes: this.config.schemes || ["https"],
             host: this.config.host || "localhost:8080",
@@ -109,6 +107,7 @@ class OpenAPIGenerator {
         let openAPIObj = this.openAPI.serialize();
         let openAPIStr = JSON.stringify(openAPIObj, null, 4)
         if(file_path){
+            // TODO: Add safety check to make sure output directory exists
             fs.writeFileSync(file_path, openAPIStr);
         }else{
             console.log(openAPIStr);
@@ -124,15 +123,18 @@ class OpenAPIGenerator {
      * @param {String} [file_path=undefined] - Path for output file
      * @description Given 
      * */
-    static convert(config, file_path){
+    static convert(contract_path, file_path, config={}){
         if (isString(config)){
             if (!fs.existsSync(config)) return errorClose(`Specified config file "${config}" does not exist.`)
             if (!isJSONFile(config)) return errorClose(`Specified config file "${config}" is not a JSON file.`)
         }
+        if (!isString(contract_path)) return errorClose(`Specified contract_path was not a string: ${contract_path}`);
+        if (!isJSONFile(contract_path)) return errorClose(`Specified contract_path is not a valid JSON filename: ${contract_path}`);
+        if (!fs.existsSync(contract_path)) return errorClose(`Specified contract_path does not point to an existing file: ${contract_path}`);
         if (!isString(file_path)) return errorClose("Provided output path was not a string.");
         if (!isJSONFile(file_path)) return errorClose(`Specified output file "${file_path}" is not a JSON file.`)
 
-        let generator = new OpenAPIGenerator(config);
+        let generator = new OpenAPIGenerator(contract_path, config);
         generator.init();
         generator.process();
         return generator.build(file_path);
