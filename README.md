@@ -15,7 +15,7 @@ yarn global add abi2oas
 Use in your terminal of choice by running:
 
 ```
-abi2oas <path_to_config.json> <path_to_output.json>
+abi2oas <path_to_contract.json> <path_to_output.json>
 ```
 
 If you are on Windows, you might need to refresh your path by restarting the terminal.
@@ -38,7 +38,7 @@ const abi2oas = require('abi2oas');
 
 const contractApiSpec = abi2oas.convert(<path_to_contract.json>, <output_path.json>, [config]);
 ```
-`.convert()` runs synchronously and returns the serialized object corresponding to the OpenAPI JSON.  `config` in this method may either be an object or a string pointing to a config JSON.  Read below for config spec.
+`.convert()` runs synchronously and returns the serialized object corresponding to the OpenAPI JSON, along with saving the JSON to the specified path.  `config` in this method may either be an object or a string pointing to a config JSON.  Read below for config spec.
 
 ## Method Mapping
 The smart contract is mapped to the OpenAPI spec on a per-function basis:  
@@ -48,19 +48,18 @@ The smart contract is mapped to the OpenAPI spec on a per-function basis:
 - Definitions are automatically generated for each function-method's params and response (e.g. `whitelistAddress_post_params` & `whitelistAddress_post_params_response`), as well as definitions for receipts and basic types.
 
 ## Config
-The config JSON includes the path to the contract, ethereum options, and swagger options.
+The config JSON lets you configure Swagger and Web3 options for your API.  All keys are optional, the values shown are used by default.
 
 ```
 {
-  "version": "1.0.0", // optional, "1.0.0" is default
-  "schemes": ["https"], // optional, ["https"] is default
-  "host": "localhost:8080", // optional, "localhost:8080" is default
-  "basePath": "/", // optional, '/' is default
+  "version": "1.0.0",
+  "schemes": ["https"],
+  "host": "localhost:8080",
+  "basePath": "/",
   "tags": [ // Optional custom tags...],
   "api": { // Optional, add tags to methods; see below }
 }
 ```
-Config must be valid JSON, comments only included for illustrative purposes.
 
 ### Custom Tags
 You can specify additional tags using the `tags` key.  
